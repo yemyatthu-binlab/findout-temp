@@ -51,7 +51,7 @@ function HomepageHeader() {
 								<div className={styles.iphoneNotch} />
 								<div className={styles.iphoneScreen}>
 									<img
-										src={useBaseUrl('img/login.PNG')}
+										src={useBaseUrl('img/login.png')}
 										alt="App Screenshot"
 										className={styles.appScreenshot}
 									/>
