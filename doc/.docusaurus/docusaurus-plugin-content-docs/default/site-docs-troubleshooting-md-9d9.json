@@ -6,7 +6,7 @@
   "source": "@site/docs/troubleshooting.md",
   "sourceDirName": ".",
   "slug": "/troubleshooting",
-  "permalink": "/findout-app/docs/troubleshooting",
+  "permalink": "/findout-temp/docs/troubleshooting",
   "draft": false,
   "tags": [],
   "version": "current",
@@ -17,6 +17,6 @@
   "sidebar": "docs",
   "previous": {
     "title": "CI/CD",
-    "permalink": "/findout-app/docs/ci-cd"
+    "permalink": "/findout-temp/docs/ci-cd"
   }
 }

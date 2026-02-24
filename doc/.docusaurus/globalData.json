@@ -1,53 +1,53 @@
 {
   "docusaurus-plugin-content-docs": {
     "default": {
-      "path": "/findout-app/docs",
+      "path": "/findout-temp/docs",
       "versions": [
         {
           "name": "current",
           "label": "Next",
           "isLast": true,
-          "path": "/findout-app/docs",
+          "path": "/findout-temp/docs",
           "mainDocId": "intro",
           "docs": [
             {
               "id": "building-release",
-              "path": "/findout-app/docs/building-release",
+              "path": "/findout-temp/docs/building-release",
               "sidebar": "docs"
             },
             {
               "id": "ci-cd",
-              "path": "/findout-app/docs/ci-cd",
+              "path": "/findout-temp/docs/ci-cd",
               "sidebar": "docs"
             },
             {
               "id": "development-guide",
-              "path": "/findout-app/docs/development-guide",
+              "path": "/findout-temp/docs/development-guide",
               "sidebar": "docs"
             },
             {
               "id": "getting-started",
-              "path": "/findout-app/docs/getting-started",
+              "path": "/findout-temp/docs/getting-started",
               "sidebar": "docs"
             },
             {
               "id": "intro",
-              "path": "/findout-app/docs/intro",
+              "path": "/findout-temp/docs/intro",
               "sidebar": "docs"
             },
             {
               "id": "project-architecture",
-              "path": "/findout-app/docs/project-architecture",
+              "path": "/findout-temp/docs/project-architecture",
               "sidebar": "docs"
             },
             {
               "id": "services-integration",
-              "path": "/findout-app/docs/services-integration",
+              "path": "/findout-temp/docs/services-integration",
               "sidebar": "docs"
             },
             {
               "id": "troubleshooting",
-              "path": "/findout-app/docs/troubleshooting",
+              "path": "/findout-temp/docs/troubleshooting",
               "sidebar": "docs"
             }
           ],
@@ -55,7 +55,7 @@
           "sidebars": {
             "docs": {
               "link": {
-                "path": "/findout-app/docs/intro",
+                "path": "/findout-temp/docs/intro",
                 "label": "intro"
               }
             }

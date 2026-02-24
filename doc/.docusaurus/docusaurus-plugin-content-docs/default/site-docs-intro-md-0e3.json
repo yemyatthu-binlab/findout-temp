@@ -6,7 +6,7 @@
   "source": "@site/docs/intro.md",
   "sourceDirName": ".",
   "slug": "/intro",
-  "permalink": "/findout-app/docs/intro",
+  "permalink": "/findout-temp/docs/intro",
   "draft": false,
   "tags": [],
   "version": "current",
@@ -17,6 +17,6 @@
   "sidebar": "docs",
   "next": {
     "title": "Getting Started",
-    "permalink": "/findout-app/docs/getting-started"
+    "permalink": "/findout-temp/docs/getting-started"
   }
 }

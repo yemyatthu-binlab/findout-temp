@@ -33,7 +33,7 @@ function HomepageHeader() {
 							</Link>
 							<Link
 								className="button button--secondary button--lg"
-								to="https://github.com/patchwork-hub/findout-app"
+								to="https://github.com/yemyatthu-binlab/findout-temp.git"
 							>
 								View on GitHub
 							</Link>

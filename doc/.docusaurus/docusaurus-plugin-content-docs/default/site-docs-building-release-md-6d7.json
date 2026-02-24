@@ -6,7 +6,7 @@
   "source": "@site/docs/building-release.md",
   "sourceDirName": ".",
   "slug": "/building-release",
-  "permalink": "/findout-app/docs/building-release",
+  "permalink": "/findout-temp/docs/building-release",
   "draft": false,
   "tags": [],
   "version": "current",
@@ -17,10 +17,10 @@
   "sidebar": "docs",
   "previous": {
     "title": "Development Guide",
-    "permalink": "/findout-app/docs/development-guide"
+    "permalink": "/findout-temp/docs/development-guide"
   },
   "next": {
     "title": "Services Integration",
-    "permalink": "/findout-app/docs/services-integration"
+    "permalink": "/findout-temp/docs/services-integration"
   }
 }

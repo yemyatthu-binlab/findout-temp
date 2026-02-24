@@ -9,8 +9,8 @@
           "badge": false,
           "noIndex": false,
           "className": "docs-version-current",
-          "path": "/findout-app/docs",
-          "tagsPath": "/findout-app/docs/tags",
+          "path": "/findout-temp/docs",
+          "tagsPath": "/findout-temp/docs/tags",
           "isLast": true,
           "routePriority": -1,
           "sidebarFilePath": "/Users/mac/Desktop/app.findoutMedia/findout-app/doc/sidebars.js",
@@ -25,7 +25,7 @@
               "source": "@site/docs/building-release.md",
               "sourceDirName": ".",
               "slug": "/building-release",
-              "permalink": "/findout-app/docs/building-release",
+              "permalink": "/findout-temp/docs/building-release",
               "draft": false,
               "tags": [],
               "version": "current",
@@ -36,11 +36,11 @@
               "sidebar": "docs",
               "previous": {
                 "title": "Development Guide",
-                "permalink": "/findout-app/docs/development-guide"
+                "permalink": "/findout-temp/docs/development-guide"
               },
               "next": {
                 "title": "Services Integration",
-                "permalink": "/findout-app/docs/services-integration"
+                "permalink": "/findout-temp/docs/services-integration"
               }
             },
             {
@@ -51,7 +51,7 @@
               "source": "@site/docs/ci-cd.md",
               "sourceDirName": ".",
               "slug": "/ci-cd",
-              "permalink": "/findout-app/docs/ci-cd",
+              "permalink": "/findout-temp/docs/ci-cd",
               "draft": false,
               "tags": [],
               "version": "current",
@@ -62,11 +62,11 @@
               "sidebar": "docs",
               "previous": {
                 "title": "Services Integration",
-                "permalink": "/findout-app/docs/services-integration"
+                "permalink": "/findout-temp/docs/services-integration"
               },
               "next": {
                 "title": "Troubleshooting",
-                "permalink": "/findout-app/docs/troubleshooting"
+                "permalink": "/findout-temp/docs/troubleshooting"
               }
             },
             {
@@ -77,7 +77,7 @@
               "source": "@site/docs/development-guide.md",
               "sourceDirName": ".",
               "slug": "/development-guide",
-              "permalink": "/findout-app/docs/development-guide",
+              "permalink": "/findout-temp/docs/development-guide",
               "draft": false,
               "tags": [],
               "version": "current",
@@ -88,11 +88,11 @@
               "sidebar": "docs",
               "previous": {
                 "title": "Project Architecture",
-                "permalink": "/findout-app/docs/project-architecture"
+                "permalink": "/findout-temp/docs/project-architecture"
               },
               "next": {
                 "title": "Building for Release",
-                "permalink": "/findout-app/docs/building-release"
+                "permalink": "/findout-temp/docs/building-release"
               }
             },
             {
@@ -103,7 +103,7 @@
               "source": "@site/docs/getting-started.md",
               "sourceDirName": ".",
               "slug": "/getting-started",
-              "permalink": "/findout-app/docs/getting-started",
+              "permalink": "/findout-temp/docs/getting-started",
               "draft": false,
               "tags": [],
               "version": "current",
@@ -114,11 +114,11 @@
               "sidebar": "docs",
               "previous": {
                 "title": "Introduction",
-                "permalink": "/findout-app/docs/intro"
+                "permalink": "/findout-temp/docs/intro"
               },
               "next": {
                 "title": "Project Architecture",
-                "permalink": "/findout-app/docs/project-architecture"
+                "permalink": "/findout-temp/docs/project-architecture"
               }
             },
             {
@@ -129,7 +129,7 @@
               "source": "@site/docs/intro.md",
               "sourceDirName": ".",
               "slug": "/intro",
-              "permalink": "/findout-app/docs/intro",
+              "permalink": "/findout-temp/docs/intro",
               "draft": false,
               "tags": [],
               "version": "current",
@@ -140,7 +140,7 @@
               "sidebar": "docs",
               "next": {
                 "title": "Getting Started",
-                "permalink": "/findout-app/docs/getting-started"
+                "permalink": "/findout-temp/docs/getting-started"
               }
             },
             {
@@ -151,7 +151,7 @@
               "source": "@site/docs/project-architecture.md",
               "sourceDirName": ".",
               "slug": "/project-architecture",
-              "permalink": "/findout-app/docs/project-architecture",
+              "permalink": "/findout-temp/docs/project-architecture",
               "draft": false,
               "tags": [],
               "version": "current",
@@ -162,11 +162,11 @@
               "sidebar": "docs",
               "previous": {
                 "title": "Getting Started",
-                "permalink": "/findout-app/docs/getting-started"
+                "permalink": "/findout-temp/docs/getting-started"
               },
               "next": {
                 "title": "Development Guide",
-                "permalink": "/findout-app/docs/development-guide"
+                "permalink": "/findout-temp/docs/development-guide"
               }
             },
             {
@@ -177,7 +177,7 @@
               "source": "@site/docs/services-integration.md",
               "sourceDirName": ".",
               "slug": "/services-integration",
-              "permalink": "/findout-app/docs/services-integration",
+              "permalink": "/findout-temp/docs/services-integration",
               "draft": false,
               "tags": [],
               "version": "current",
@@ -188,11 +188,11 @@
               "sidebar": "docs",
               "previous": {
                 "title": "Building for Release",
-                "permalink": "/findout-app/docs/building-release"
+                "permalink": "/findout-temp/docs/building-release"
               },
               "next": {
                 "title": "CI/CD",
-                "permalink": "/findout-app/docs/ci-cd"
+                "permalink": "/findout-temp/docs/ci-cd"
               }
             },
             {
@@ -203,7 +203,7 @@
               "source": "@site/docs/troubleshooting.md",
               "sourceDirName": ".",
               "slug": "/troubleshooting",
-              "permalink": "/findout-app/docs/troubleshooting",
+              "permalink": "/findout-temp/docs/troubleshooting",
               "draft": false,
               "tags": [],
               "version": "current",
@@ -214,7 +214,7 @@
               "sidebar": "docs",
               "previous": {
                 "title": "CI/CD",
-                "permalink": "/findout-app/docs/ci-cd"
+                "permalink": "/findout-temp/docs/ci-cd"
               }
             }
           ],
@@ -273,7 +273,7 @@
       "blogPosts": [],
       "blogListPaginated": [],
       "blogTags": {},
-      "blogTagsListPath": "/findout-app/blog/tags",
+      "blogTagsListPath": "/findout-temp/blog/tags",
       "blogTagsPaginated": []
     }
   },
@@ -281,7 +281,7 @@
     "default": [
       {
         "type": "jsx",
-        "permalink": "/findout-app/",
+        "permalink": "/findout-temp/",
         "source": "@site/src/pages/index.js"
       }
     ]

@@ -12,7 +12,7 @@
       {
         "type": "link",
         "label": "Introduction",
-        "href": "/findout-app/docs/intro",
+        "href": "/findout-temp/docs/intro",
         "docId": "intro"
       },
       {
@@ -22,43 +22,43 @@
           {
             "type": "link",
             "label": "Getting Started",
-            "href": "/findout-app/docs/getting-started",
+            "href": "/findout-temp/docs/getting-started",
             "docId": "getting-started"
           },
           {
             "type": "link",
             "label": "Project Architecture",
-            "href": "/findout-app/docs/project-architecture",
+            "href": "/findout-temp/docs/project-architecture",
             "docId": "project-architecture"
           },
           {
             "type": "link",
             "label": "Development Guide",
-            "href": "/findout-app/docs/development-guide",
+            "href": "/findout-temp/docs/development-guide",
             "docId": "development-guide"
           },
           {
             "type": "link",
             "label": "Building for Release",
-            "href": "/findout-app/docs/building-release",
+            "href": "/findout-temp/docs/building-release",
             "docId": "building-release"
           },
           {
             "type": "link",
             "label": "Services Integration",
-            "href": "/findout-app/docs/services-integration",
+            "href": "/findout-temp/docs/services-integration",
             "docId": "services-integration"
           },
           {
             "type": "link",
             "label": "CI/CD",
-            "href": "/findout-app/docs/ci-cd",
+            "href": "/findout-temp/docs/ci-cd",
             "docId": "ci-cd"
           },
           {
             "type": "link",
             "label": "Troubleshooting",
-            "href": "/findout-app/docs/troubleshooting",
+            "href": "/findout-temp/docs/troubleshooting",
             "docId": "troubleshooting"
           }
         ],

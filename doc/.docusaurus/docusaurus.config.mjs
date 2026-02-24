@@ -6,13 +6,13 @@
 export default {
   "title": "FindOut Media",
   "tagline": "Developer Documentation",
-  "url": "https://patchwork-hub.github.io",
-  "baseUrl": "/findout-app/",
+  "url": "https://yemyatthu-binlab.github.io",
+  "baseUrl": "/findout-temp/",
   "onBrokenLinks": "throw",
   "onBrokenMarkdownLinks": "warn",
   "favicon": "img/favicon.ico",
-  "organizationName": "patchwork-hub",
-  "projectName": "findout-app",
+  "organizationName": "yemyatthu-binlab",
+  "projectName": "findout-temp",
   "trailingSlash": false,
   "presets": [
     [
