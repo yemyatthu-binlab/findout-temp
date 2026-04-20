@@ -736,6 +736,7 @@ const CollapsibleFeedHeader = (props: ChannelProps | ProfileProps) => {
 						username={props.channelInfo.channel_admin}
 						joinedDate={dayjs(props.channelInfo.created_at).format('MMM YYYY')}
 						userBio={props.channel?.description}
+						showHandleInfo={true}
 					/>
 					<Underline className="mt-4 border-white dark:border-black" />
 				</>
@@ -753,6 +754,7 @@ const CollapsibleFeedHeader = (props: ChannelProps | ProfileProps) => {
 						userBio={props.profile?.note}
 						emojis={props.profile.emojis}
 						locked={props.profile?.locked}
+						showHandleInfo={true}
 					/>
 					<SocialSection
 						isMyAccount={props.is_my_account}

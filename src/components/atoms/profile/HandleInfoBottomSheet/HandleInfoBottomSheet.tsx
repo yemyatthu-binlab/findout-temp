@@ -105,7 +105,6 @@ const HandleInfoBottomSheet = React.forwardRef<
 				<View className="bg-zinc-300 dark:bg-zinc-800 rounded-lg p-4 mb-6">
 					<ThemeText size="xs_12" className="text-zinc-400 mb-1">
 						{t('handle_info.account_handle')}
-						Account handle:
 					</ThemeText>
 					<View className="flex-row items-center justify-between">
 						<ThemeText
