@@ -24,14 +24,13 @@ import { usePushNoticationStore } from '@/store/pushNoti/pushNotiStore';
 import { usePushNotiTokenMutation } from '@/hooks/mutations/pushNoti.mutation';
 import { useColorScheme } from 'nativewind';
 import { useTabBarTheme } from '@/hooks/custom/useTabBarTheme';
-import { useShowMastodonInstance } from '@/hooks/queries/auth.queries';
 
 const { width: windowWidth } = Dimensions.get('window');
 
 const HomeFeed = ({ navigation }: HomeStackScreenProps<'HomeFeed'>) => {
 	const { t, i18n } = useTranslation();
 	const { colorScheme } = useColorScheme();
-	const { data: showMastodonInstance } = useShowMastodonInstance();
+	// const { data: showMastodonInstance } = useShowMastodonInstance();
 	const { userInfo, userOriginInstance, selectedTimeline, homeLayout } =
 		useAuthStore();
 	const { barColor, tabBarTextColor, indicatorColor } = useTabBarTheme({
@@ -68,8 +67,6 @@ const HomeFeed = ({ navigation }: HomeStackScreenProps<'HomeFeed'>) => {
 
 	const insets = useSafeAreaInsets();
 
-	const showFindOutTab = showMastodonInstance?.data?.display;
-
 	return (
 		<View
 			style={{
@@ -86,11 +83,9 @@ const HomeFeed = ({ navigation }: HomeStackScreenProps<'HomeFeed'>) => {
 			/>
 			<View style={{ flex: 1, width: '100%' }}>
 				<Tabs.Container
-					key={`${homeLayout}-${showFindOutTab}`}
+					key={`${homeLayout}`}
 					minHeaderHeight={insets.top}
-					initialTabName={
-						homeLayout === 2 || !showFindOutTab ? 'Following' : 'Home'
-					}
+					initialTabName={homeLayout === 2 ? 'Following' : 'Home'}
 					renderHeader={() => (
 						<View style={{ paddingTop: insets.top, backgroundColor: barColor }}>
 							<HomeFeedHeader account={userInfo!} showUnderLine={false} />
@@ -127,7 +122,7 @@ const HomeFeed = ({ navigation }: HomeStackScreenProps<'HomeFeed'>) => {
 												marginLeft: windowWidth * 0.0625,
 										  }
 										: {
-												maxWidth: showFindOutTab ? 110 : windowWidth * 0.4,
+												maxWidth: 110,
 												marginHorizontal: 12,
 										  }),
 								}}
@@ -159,7 +154,7 @@ const HomeFeed = ({ navigation }: HomeStackScreenProps<'HomeFeed'>) => {
 					}}
 				>
 					{[
-						homeLayout !== 2 && showFindOutTab ? (
+						homeLayout !== 2 ? (
 							<Tabs.Tab
 								key="HomeTabFirst"
 								name="Home"
@@ -179,7 +174,7 @@ const HomeFeed = ({ navigation }: HomeStackScreenProps<'HomeFeed'>) => {
 							)}
 						</Tabs.Tab>,
 
-						homeLayout === 2 && showFindOutTab ? (
+						homeLayout === 2 ? (
 							<Tabs.Tab
 								key="HomeTabSecond"
 								name="Home"

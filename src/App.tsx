@@ -53,7 +53,7 @@ import { useUserThemeSetting } from './hooks/queries/profile.queries';
 Sound.setCategory('Ambient', true);
 
 Sentry.init({
-	dsn: isDevelopment() ? undefined : process.env.DEFAULT_SENTRY_DSN,
+	dsn: isDevelopment() ? undefined : process.env.SENTRY_DSN,
 	tunnel: '/tunnel',
 	tracesSampleRate: 1.0,
 	debug: false,
