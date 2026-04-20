@@ -18,6 +18,7 @@ type UserAccountInfoProps = {
 	emojis?: Patchwork.Emoji[];
 	userRoles?: Patchwork.Role[] | undefined;
 	locked?: boolean;
+	showHandleInfo?: boolean;
 };
 
 const UserAccountInfo = ({
@@ -31,11 +32,18 @@ const UserAccountInfo = ({
 	emojis,
 	userRoles,
 	locked,
+	showHandleInfo = false,
 }: UserAccountInfoProps) => {
 	const bottomSheetRef = useRef<BottomSheetModal>(null);
+
 	const handlePress = useCallback(() => {
+		if (!showHandleInfo) {
+			return;
+		}
+
 		bottomSheetRef.current?.present();
-	}, []);
+	}, [showHandleInfo]);
+
 	const domain = useSelectedDomain();
 
 	return (
@@ -50,16 +58,21 @@ const UserAccountInfo = ({
 					userRoles,
 					locked,
 				}}
-				onPress={handlePress}
+				onPress={showHandleInfo ? handlePress : undefined}
 			/>
-			<UserName {...{ username, joinedDate }} onPress={handlePress} />
+			<UserName
+				{...{ username, joinedDate }}
+				onPress={showHandleInfo ? handlePress : undefined}
+			/>
 			{userBio && <Bio {...{ userBio, userBioTextStyle, emojis }} />}
-			<HandleInfoBottomSheet
-				ref={bottomSheetRef}
-				username={username}
-				domain={domain ?? ''}
-				joinedDate={joinedDate}
-			/>
+			{showHandleInfo && (
+				<HandleInfoBottomSheet
+					ref={bottomSheetRef}
+					username={username}
+					domain={domain ?? ''}
+					joinedDate={joinedDate}
+				/>
+			)}
 		</View>
 	);
 };
