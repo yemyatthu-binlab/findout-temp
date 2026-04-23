@@ -153,8 +153,8 @@ const SplashAnimation: React.FC<SplashAnimationProps> = ({
 					className="self-end mt-2"
 				>
 					<Image
-						source={require('../../../../assets/images/MEDIA_TEXT.png')}
-						style={{ width: 95, height: 28 }}
+						source={require('../../../../assets/images/SOCIAL_TEXT.png')}
+						style={{ width: 95, height: 32 }}
 					/>
 				</Animated.View>
 			</Animated.View>

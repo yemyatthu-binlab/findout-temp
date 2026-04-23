@@ -61,7 +61,7 @@ const HowToUseApp = () => {
 		<SafeScreen style={{ backgroundColor: screenBg }}>
 			<Header
 				leftCustomComponent={<BackButton />}
-				title="How to use Find Out Media"
+				title="How to use Find Out Social"
 			/>
 
 			{/* Progress Bar */}

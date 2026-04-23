@@ -84,7 +84,7 @@ const HomeFeedHeader = ({ account, showUnderLine = true }: Props) => {
 
 					<View className="flex flex-1 mx-3 text-center items-center">
 						<ThemeText className="font-BBHSansBogle_Regular text-3xl">
-							Find Out Media
+							Find Out Social
 						</ThemeText>
 					</View>
 				</View>

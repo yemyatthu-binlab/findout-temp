@@ -115,15 +115,15 @@ const WpStoryDetail: React.FC<HomeStackScreenProps<'WpStoryDetail'>> = ({
 							},
 						},
 						linkMetadata: {
-							title: 'Find Out Media',
+							title: 'Find Out Social',
 							icon: FALLBACK_PREVIEW_IMAGE_URL,
 						},
 					},
 				],
 			},
 			default: {
-				title: 'Find Out Media',
-				subject: 'Find Out Media',
+				title: 'Find Out Social',
+				subject: 'Find Out Social',
 				message: SHARE_LINK_URL,
 			},
 		});

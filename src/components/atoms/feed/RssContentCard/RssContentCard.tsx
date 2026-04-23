@@ -3,7 +3,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Pressable, View } from 'react-native';
+import { Pressable, View, Linking } from 'react-native';
+import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 import ThemeImage from '../../common/ThemeImage/ThemeImage';
 import { ThemeText } from '../../common/ThemeText/ThemeText';
 import { useNavigation } from '@react-navigation/native';
@@ -27,8 +28,23 @@ const RssContentCard = ({
 	const regex = /(<([^>]+)>)/gi;
 	const metaCardTitle = meta?.title?.replace(regex, '');
 
-	const navigateToWebView = (url: string) => {
-		navigation.navigate('WebViewer', { url });
+	const navigateToWebView = async (url: string) => {
+		try {
+			if (await InAppBrowser.isAvailable()) {
+				await InAppBrowser.open(url, {
+					animated: true,
+					modalPresentationStyle: 'fullScreen',
+					modalTransitionStyle: 'coverVertical',
+					modalEnabled: true,
+					enableBarCollapsing: false,
+				});
+			} else {
+				Linking.openURL(url);
+			}
+		} catch (error) {
+			console.error('Error opening InAppBrowser:', error);
+			Linking.openURL(url);
+		}
 	};
 
 	const isFallbackImage = meta?.image?.includes('fom-fallback.png');

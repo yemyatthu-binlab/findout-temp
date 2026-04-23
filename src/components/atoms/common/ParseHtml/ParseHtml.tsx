@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { ElementType, parseDocument } from 'htmlparser2';
-import { Platform, Pressable, View } from 'react-native';
+import { Platform, Pressable, View, Linking } from 'react-native';
+import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 import { ThemeText } from '../ThemeText/ThemeText';
 import { useNavigation } from '@react-navigation/native';
 import { HomeStackParamList } from '@/types/navigation';
@@ -88,9 +89,24 @@ const ParseHtml = ({
 		}
 	};
 
-	const navigateToWebView = (url: string) => {
+	const navigateToWebView = async (url: string) => {
 		if (isFromQuoteCompose) return;
-		navigation.navigate('WebViewer', { url });
+		try {
+			if (await InAppBrowser.isAvailable()) {
+				await InAppBrowser.open(url, {
+					animated: true,
+					modalPresentationStyle: 'fullScreen',
+					modalTransitionStyle: 'coverVertical',
+					modalEnabled: true,
+					enableBarCollapsing: false,
+				});
+			} else {
+				Linking.openURL(url);
+			}
+		} catch (error) {
+			console.error('Error opening InAppBrowser:', error);
+			Linking.openURL(url);
+		}
 	};
 
 	const handleSeeMorePress = () => {

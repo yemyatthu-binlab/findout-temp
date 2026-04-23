@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Find Out Media</string>
+	<string>Find Out Social</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>Find Out Social</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -25,7 +25,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>FindOutMedia</string>
+				<string>FindOutSocial</string>
 			</array>
 		</dict>
 	</array>
@@ -49,13 +49,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Find Out Media uses the camera so you can take profile photos or capture images and videos to share in your posts.</string>
+	<string>Find Out Social uses the camera so you can take profile photos or capture images and videos to share in your posts.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Find Out Media uses the microphone so you can record voice messages or add audio to your videos before posting.</string>
+	<string>Find Out Social uses the microphone so you can record voice messages or add audio to your videos before posting.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Find Out Media needs access to your photo library to save photos or videos that you create or edit within the app.</string>
+	<string>Find Out Social needs access to your photo library to save photos or videos that you create or edit within the app.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Find Out Media needs access to your photo library so you can choose photos or videos to use as profile pictures or share in posts.</string>
+	<string>Find Out Social needs access to your photo library so you can choose photos or videos to use as profile pictures or share in posts.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>StallionAppToken</key>
