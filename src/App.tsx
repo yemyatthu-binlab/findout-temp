@@ -41,9 +41,12 @@ import {
 	removeAccount,
 } from './util/storage';
 import { useAccounts } from './hooks/custom/useAccounts';
-import SplashAnimation from './components/organisms/SplashAnimation/SplashAnimation';
+import { useAppConfigStore } from './store/appConfig/appConfigStore';
 import { SystemBars } from 'react-native-edge-to-edge';
 import Sound from 'react-native-sound';
+import { Wander } from 'react-native-animated-spinkit';
+import { useWhiteLabelImages } from './hooks/custom/useWhiteLabelImages';
+import { Image } from 'react-native';
 
 Sound.setCategory('Ambient', true);
 
@@ -65,6 +68,7 @@ const toastConfig = {
 
 function App() {
 	const { colorScheme, setColorScheme } = useColorScheme();
+	const { appIcon } = useWhiteLabelImages();
 	const { i18n } = useTranslation();
 	const { language, setLanguage, setDefaultGuestLanguage } = useLanguageStore();
 	const { setSelectedLanguage } = useLanguageSelectionActions();
@@ -79,6 +83,7 @@ function App() {
 	const [isLoading, setLoading] = useState(true);
 	const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>();
 	const { activeAccId } = useAccounts();
+	const activeAppInfo = useAppConfigStore(state => state.activeAppInfo);
 
 	const hasStartedInitialization = useRef(false);
 
@@ -111,13 +116,16 @@ function App() {
 	};
 
 	const retrieveToken = async () => {
-		const { access_token, domain } = await getActiveAuthState();
+		const { access_token } = await getActiveAuthState();
+		const domain =
+			useAppConfigStore.getState().activeAppInfo?.baseUrl || DEFAULT_INSTANCE;
 
 		if (!access_token)
 			return handleLocaleIfAuthFail().finally(() => setLoading(false));
 
 		try {
 			const userInfo = await verifyAuthToken(access_token, domain);
+
 			if (!userInfo) return handleLocaleIfAuthFail();
 
 			// noted: for account switching flow
@@ -135,7 +143,6 @@ function App() {
 
 			setUserInfo(userInfo);
 			setUserOriginInstance(domain);
-
 			setAuthState({
 				wordpress: { token: '' },
 				mastodon: { token: access_token },
@@ -145,7 +152,6 @@ function App() {
 			if (userSetting) {
 				setSelectedTimeline(userSetting.settings?.user_timeline[0]);
 			}
-
 			const userPrefs = await getUserLocale();
 			const lang = userPrefs?.['posting:default:language'];
 			if (lang) setLanguage(lang as ILanguage);
@@ -157,17 +163,19 @@ function App() {
 	};
 
 	const handleLocaleIfAuthFail = async () => {
-		clearAuthState();
 		if (activeAccId) {
 			await removeAccount(activeAccId);
 		}
+		const targetDomain =
+			useAppConfigStore.getState().activeAppInfo?.baseUrl || DEFAULT_INSTANCE;
+
 		const defaultInstance = await queryClient.fetchQuery<
 			Patchwork.Instance_V2,
 			Error,
 			Patchwork.Instance_V2,
 			SearchServerInstanceQueryKey
 		>({
-			queryKey: ['search-server-instance', { domain: DEFAULT_INSTANCE }],
+			queryKey: ['search-server-instance', { domain: targetDomain }],
 			queryFn: searchServerInstance,
 		});
 		const isDefaultLocaleSupported = supportedLanguage.includes(
@@ -201,8 +209,34 @@ function App() {
 		}
 	}, [resolvedTheme]);
 
+	useEffect(() => {
+		initializeApp();
+	}, []);
+
 	if (isLoading) {
-		return <SplashAnimation onFinishAnimation={initializeApp} />;
+		return (
+			<View className="flex-1 bg-white dark:bg-patchwork-dark-100 items-center justify-center">
+				<Image
+					source={
+						appIcon
+							? { uri: appIcon }
+							: require('../assets/images/PatchworkColorful.png')
+					}
+					style={
+						appIcon
+							? { width: 160, height: 160, borderRadius: 32 }
+							: { width: 160, height: 160 }
+					}
+					resizeMode="contain"
+				/>
+				<View className="mt-8">
+					<Wander
+						size={48}
+						color={colorScheme === 'dark' ? '#FFFFFF' : '#000000'}
+					/>
+				</View>
+			</View>
+		);
 	}
 
 	return (

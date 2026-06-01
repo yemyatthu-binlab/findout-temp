@@ -2,30 +2,31 @@ import SafeScreen from '@/components/template/SafeScreen/SafeScreen';
 import { Button } from '@/components/atoms/common/Button/Button';
 import { ThemeText } from '@/components/atoms/common/ThemeText/ThemeText';
 import { GuestStackScreenProps } from '@/types/navigation';
-import { CustomCurveIcon, PatchworkLogo } from '@/util/svg/icon.common';
+import { PatchworkLogo } from '@/util/svg/icon.common';
 import { Image, View } from 'react-native';
 import { cn } from '@/util/helper/twutil';
 import { isTablet } from '@/util/helper/isTablet';
 import { Trans, useTranslation } from 'react-i18next';
 import LanguageSelectorModal from '@/components/molecules/account/LanguageSelectorModal/LanguageSelectorModal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useAuthStoreAction } from '@/store/auth/authStore';
-import { verifyAuthToken } from '@/services/auth.service';
-import { Alert } from 'react-native';
-import { Flow } from 'react-native-animated-spinkit';
 import AccountSwitchingModal from '@/components/organisms/switchingAccounts/AccountSwitchingModal/AccountSwitchingModal';
-import { DEFAULT_API_URL } from '@/util/constant';
-import { addOrUpdateAccount, AuthState } from '@/util/storage';
 import { useColorScheme } from 'nativewind';
+import {
+	useAppConfigActions,
+	useAppConfigStore,
+} from '@/store/appConfig/appConfigStore';
+import { useWhiteLabelImages } from '@/hooks/custom/useWhiteLabelImages';
 
 const Welcome: React.FC<GuestStackScreenProps<'Welcome'>> = ({
 	navigation,
 }) => {
 	const { colorScheme } = useColorScheme();
 	const { t, i18n } = useTranslation();
+	const { appIcon } = useWhiteLabelImages();
 	const { top } = useSafeAreaInsets();
+	const { clearAppConfig } = useAppConfigActions();
+	const appName = useAppConfigStore(state => state.activeAppInfo?.appName);
 	const lineHeightStyle = i18n.language === 'my' ? { lineHeight: 32 } : {};
-	const { setAuthState, setUserInfo } = useAuthStoreAction();
 
 	return (
 		<SafeScreen className="pt-0">
@@ -35,8 +36,19 @@ const Welcome: React.FC<GuestStackScreenProps<'Welcome'>> = ({
 				</View>
 				<View className="h-[40%] items-center justify-end">
 					<View className="items-center justify-center mt-10">
-						<PatchworkLogo colorScheme={colorScheme} />
+						{appIcon ? (
+							<Image
+								source={{ uri: appIcon }}
+								className="w-[90px] h-[90px] rounded-2xl"
+								resizeMode="cover"
+							/>
+						) : (
+							<PatchworkLogo colorScheme={colorScheme} />
+						)}
 					</View>
+					<ThemeText className="mt-4 text-2xl font-bold text-black dark:text-white">
+						{appName || 'Patchwork'}
+					</ThemeText>
 				</View>
 				<View className="flex-1 rounded-tr-[50] bg-white dark:bg-patchwork-dark-100 p-6 pb-10">
 					<View className="flex-grow items-center mx-3">
@@ -112,8 +124,17 @@ const Welcome: React.FC<GuestStackScreenProps<'Welcome'>> = ({
 					</ThemeText>
 				</View>
 			</View>
-			<View style={{ paddingTop: top + 16 }} className="absolute right-4">
-				<LanguageSelectorModal />
+			<View style={{ paddingTop: top }} className="absolute right-4">
+				{/* <LanguageSelectorModal />
+				 */}
+				<Button
+					variant="default"
+					size={'sm'}
+					className="px-3 rounded-lg"
+					onPress={clearAppConfig}
+				>
+					<ThemeText className="text-white">Stop Testing</ThemeText>
+				</Button>
 			</View>
 		</SafeScreen>
 	);

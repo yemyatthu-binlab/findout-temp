@@ -4,6 +4,7 @@ import {
 	getUserById,
 	searchServerInstance,
 	verifyAuthToken,
+	getAppDetailsFromChannel,
 } from '@/services/auth.service';
 import {
 	GetNewsmastAccountlDetailQueryKey,
@@ -81,5 +82,22 @@ export const useShowMastodonInstance = () => {
 		queryFn: getShowMastodonLoginForm,
 		staleTime: Infinity,
 		gcTime: Infinity,
+	});
+};
+
+export const useGetAppDetailsFromChannelQuery = ({
+	appId,
+	userId,
+	enabled = true,
+}: {
+	appId: string;
+	userId: string;
+	enabled?: boolean;
+}) => {
+	const queryKey = ['getAppDetailsFromChannel', appId, userId];
+	return useQuery({
+		queryKey,
+		queryFn: () => getAppDetailsFromChannel({ appId, userId }),
+		enabled: !!appId && !!userId && enabled,
 	});
 };

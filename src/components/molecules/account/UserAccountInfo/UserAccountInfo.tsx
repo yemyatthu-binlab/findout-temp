@@ -5,7 +5,7 @@ import Bio from '@/components/atoms/profile/Bio/Bio';
 import UserName from '@/components/atoms/profile/UserName/UserName';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import HandleInfoBottomSheet from '@/components/atoms/profile/HandleInfoBottomSheet/HandleInfoBottomSheet';
-import { useSelectedDomain } from '@/store/feed/activeDomain';
+import { useAuthStore } from '@/store/auth/authStore';
 
 type UserAccountInfoProps = {
 	accountName: string;
@@ -36,7 +36,7 @@ const UserAccountInfo = ({
 	const handlePress = useCallback(() => {
 		bottomSheetRef.current?.present();
 	}, []);
-	const domain = useSelectedDomain();
+	const { userOriginInstance } = useAuthStore();
 
 	return (
 		<View className="flex-1 flex-col px-4">
@@ -56,7 +56,7 @@ const UserAccountInfo = ({
 			<HandleInfoBottomSheet
 				ref={bottomSheetRef}
 				username={username}
-				domain={domain ?? ''}
+				domain={userOriginInstance ?? ''}
 				joinedDate={joinedDate}
 			/>
 		</View>

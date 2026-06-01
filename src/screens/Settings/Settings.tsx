@@ -14,7 +14,11 @@ import { useActiveDomainStore } from '@/store/feed/activeDomain';
 import { ILanguage } from '@/store/feed/languageStore';
 import { usePushNoticationStore } from '@/store/pushNoti/pushNotiStore';
 import { SettingStackScreenProps } from '@/types/navigation';
-import { CHANNEL_INSTANCE, DEFAULT_INSTANCE } from '@/util/constant';
+import {
+	CHANNEL_INSTANCE,
+	DEFAULT_INSTANCE,
+	GEM_ENABLED_INSTANCES,
+} from '@/util/constant';
 import { handleError } from '@/util/helper/helper';
 import { cn } from '@/util/helper/twutil';
 import { AppIcons } from '@/util/icons/icon.common';
@@ -34,7 +38,6 @@ import i18n from '@/i18n';
 import { useTranslation } from 'react-i18next';
 import { useColorScheme } from 'nativewind';
 import { useCallback, useState } from 'react';
-const ENABLED_INSTANCES = [DEFAULT_INSTANCE, CHANNEL_INSTANCE];
 
 const Settings: React.FC<SettingStackScreenProps<'Settings'>> = ({
 	navigation,
@@ -54,7 +57,9 @@ const Settings: React.FC<SettingStackScreenProps<'Settings'>> = ({
 	const { actions, domain_name } = useActiveDomainStore();
 	const { clearAudience } = useCreateAudienceStore();
 	const { fetchAccounts, activeAccId } = useAccounts();
-	const isEnabledInstance = ENABLED_INSTANCES.includes(userOriginInstance);
+	const isEnabledInstance =
+		GEM_ENABLED_INSTANCES.includes(userOriginInstance) ||
+		userOriginInstance?.endsWith('channel.org');
 
 	const { refetch: refetchCustomMenuDisplay } = useShowMastodonInstance();
 
@@ -181,7 +186,7 @@ const Settings: React.FC<SettingStackScreenProps<'Settings'>> = ({
 						sectionKey="personalization"
 						onPress={() => navigation.navigate('PersonalizationSettings')}
 					/>
-					{[DEFAULT_INSTANCE].includes(userOriginInstance) && (
+					{isEnabledInstance && (
 						<SettingSection
 							title={t('setting.account_management', 'Account management')}
 							icon={AppIcons.accountManagement}

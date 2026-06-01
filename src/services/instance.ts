@@ -1,5 +1,6 @@
 import { useActiveDomainStore } from './../store/feed/activeDomain';
 import { useAuthStore } from '@/store/auth/authStore';
+import { useAppConfigStore } from '@/store/appConfig/appConfigStore';
 import { useLanguageStore } from '@/store/feed/languageStore';
 import { DEFAULT_WP_INSTANCE } from '@/util/constant';
 import {
@@ -23,6 +24,11 @@ instance.interceptors.request.use(async config => {
 
 	const { access_token: token, domain: userDomain } =
 		await getActiveAuthState();
+
+	const { activeAppInfo } = useAppConfigStore.getState();
+	if (activeAppInfo?.baseUrl) {
+		config.baseURL = ensureHttp(activeAppInfo.baseUrl);
+	}
 
 	const requestBaseURL = config.baseURL || '';
 	const removeToken =

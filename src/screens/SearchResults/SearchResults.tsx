@@ -23,6 +23,7 @@ import Animated, {
 	useSharedValue,
 	withTiming,
 } from 'react-native-reanimated';
+import { useWhiteLabelImages } from '@/hooks/custom/useWhiteLabelImages';
 
 const SearchResults = ({
 	navigation,
@@ -30,6 +31,7 @@ const SearchResults = ({
 }: SearchStackScreenProps<'SearchResults'>) => {
 	const { t } = useTranslation();
 	const { colorScheme } = useColorScheme();
+	const { appIcon } = useWhiteLabelImages();
 
 	const [searchKeyword, setSearchKeyword] = useState('');
 	const [finalKeyword, setFinalKeyword] = useState('');
@@ -180,18 +182,30 @@ const SearchResults = ({
 						className="flex-1 items-center mt-28"
 						onPress={() => Keyboard.dismiss()}
 					>
-						<Image
-							source={
-								colorScheme === 'light'
-									? require('../../../assets/images/patchwork_color.png')
-									: require('../../../assets/images/patchwork_logo.png')
-							}
-							style={
-								colorScheme === 'dark'
-									? { width: 180, height: 180 }
-									: { width: 80, height: 80, marginBottom: 20 }
-							}
-						/>
+						{appIcon ? (
+							<Image
+								source={{ uri: appIcon }}
+								style={{
+									width: 80,
+									height: 80,
+									marginBottom: 20,
+									borderRadius: 20,
+								}}
+							/>
+						) : (
+							<Image
+								source={
+									colorScheme === 'light'
+										? require('../../../assets/images/patchwork_color.png')
+										: require('../../../assets/images/patchwork_logo.png')
+								}
+								style={
+									colorScheme === 'dark'
+										? { width: 180, height: 180 }
+										: { width: 80, height: 80, marginBottom: 20 }
+								}
+							/>
+						)}
 						<ThemeText className="font-NewsCycle_Bold tracking-wider">
 							{t('search.search_text_guide')}
 						</ThemeText>

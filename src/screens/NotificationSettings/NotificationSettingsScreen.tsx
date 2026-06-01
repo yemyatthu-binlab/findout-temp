@@ -15,17 +15,21 @@ import {
 	updateEmailNotiSetting,
 	updateNotiMuteUnMuteCache,
 } from '@/util/cache/channel/channelCache';
-import { CHANNEL_INSTANCE, DEFAULT_INSTANCE } from '@/util/constant';
+import {
+	CHANNEL_INSTANCE,
+	DEFAULT_INSTANCE,
+	GEM_ENABLED_INSTANCES,
+} from '@/util/constant';
 import { AppIcons } from '@/util/icons/icon.common';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
-const ENABLED_INSTANCES = [DEFAULT_INSTANCE, CHANNEL_INSTANCE];
-
 const NotificationSettingsScreen = () => {
 	const { t } = useTranslation();
 	const { userOriginInstance } = useAuthStore();
-	const isEnabledInstance = ENABLED_INSTANCES.includes(userOriginInstance);
+	const isEnabledInstance =
+		GEM_ENABLED_INSTANCES.includes(userOriginInstance) ||
+		userOriginInstance?.endsWith('channel.org');
 
 	const { data: notiMuteStatus } =
 		useGetNotificationMuteStatus(isEnabledInstance);

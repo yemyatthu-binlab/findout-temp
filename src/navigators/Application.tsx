@@ -46,6 +46,9 @@ import { useColorScheme } from 'nativewind';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { removeHttps } from '@/util/helper/helper';
 
+import AppStartScanner from '@/screens/AppStartScanner/AppStartScanner';
+import { useAppConfigStore } from '@/store/appConfig/appConfigStore';
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const MyDarkTheme = {
@@ -69,12 +72,17 @@ function ApplicationNavigator() {
 	const { setTranslationLanguageData } = useTranslationLanguageStore();
 	const [showForceUpdateAlert, setShowForceUpdateAlert] = useState(false);
 	const { colorScheme } = useColorScheme();
+	const isAppScanned = useAppConfigStore(state => state.isAppScanned);
 
 	const activeAccId = `${userInfo?.username}@${removeHttps(
 		userInfo?.domain ?? '',
 	)}`;
 
-	const ENTRY_ROUTE = mastodon.token ? 'Index' : 'Guest';
+	const ENTRY_ROUTE = !isAppScanned
+		? 'AppStartScanner'
+		: mastodon.token
+		? 'Index'
+		: 'Guest';
 
 	// ********** TranslationLanguages API ********** //
 	const { data } = useTranslationLanguagesQueries();
@@ -205,6 +213,8 @@ function ApplicationNavigator() {
 				>
 					{isHydrating ? (
 						<Stack.Screen name="SplashScreen" component={SplashScreen} />
+					) : !isAppScanned ? (
+						<Stack.Screen name="AppStartScanner" component={AppStartScanner} />
 					) : !mastodon.token ? (
 						<>
 							<Stack.Screen name="Guest" component={Guest} />

@@ -17,9 +17,9 @@ import {
 import axios, { AxiosResponse } from 'axios';
 import instance from './instance';
 import { useAuthStore } from '@/store/auth/authStore';
+import { useAppConfigStore } from '@/store/appConfig/appConfigStore';
 import {
 	CHANNEL_INSTANCE,
-	DEFAULT_BRISTOL_DASHBOARD_API_URL,
 	DEFAULT_DASHBOARD_API_URL,
 	DEFAULT_INSTANCE,
 } from '@/util/constant';
@@ -34,6 +34,8 @@ export const accountInfoQueryFn = async ({
 		const isUserFormDifferentInstance =
 			domain_name == DEFAULT_INSTANCE &&
 			state.userOriginInstance !== DEFAULT_INSTANCE;
+
+		console.log('state.userOriginInstance::', state.userOriginInstance);
 
 		const resp: AxiosResponse<Patchwork.Account> = await instance.get(
 			appendApiVersion(`accounts/${id}`, 'v1'),
@@ -372,6 +374,7 @@ export const getUserLocale = async () => {
 			await instance.get(appendApiVersion(`preferences`, 'v1'));
 		return response.data;
 	} catch (e) {
+		console.log('cc::', e);
 		return handleError(e);
 	}
 };
@@ -421,19 +424,19 @@ export const changeUserLocale = async ({ lang }: { lang: string }) => {
 };
 
 export const getUserSetting = async () => {
-	const state = useAuthStore.getState();
-	const domain = removeHttps(state.userOriginInstance);
+	const appConfigState = useAppConfigStore.getState();
+	const domain = removeHttps(appConfigState.activeAppInfo?.baseUrl ?? '');
 	try {
 		const response: AxiosResponse<{ data: Patchwork.UserSetting }> =
 			await instance.get(
 				appendDynamicDomain(
-					DEFAULT_BRISTOL_DASHBOARD_API_URL,
+					DEFAULT_DASHBOARD_API_URL,
 					appendApiVersion(`settings`, 'v1'),
 				),
 				{
 					params: {
 						instance_domain: domain,
-						app_name: 'bristol_cable',
+						app_name: 'patchwork',
 					},
 				},
 			);
@@ -455,9 +458,9 @@ export const changeUserSetting = async ({
 		const domain = removeHttps(state.userOriginInstance);
 		const resp: AxiosResponse<{ message: string }> = await instance.post(
 			appendDynamicDomain(
-				DEFAULT_BRISTOL_DASHBOARD_API_URL,
+				DEFAULT_DASHBOARD_API_URL,
 				appendApiVersion(
-					`settings/upsert?app_name=bristol_cable&instance_domain=${domain}`,
+					`settings/upsert?app_name=patchwork&instance_domain=${domain}`,
 					'v1',
 				),
 			),

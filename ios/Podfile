@@ -45,6 +45,7 @@ target 'Patchwork' do
         'defined(__apple_build_version__) && __apple_build_version__ < 14000029L',
         'defined(__apple_build_version__)'
       )
+      File.chmod(0644, fmt_base_h)
       File.write(fmt_base_h, patched)
     end
 

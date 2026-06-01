@@ -505,6 +505,149 @@ declare namespace Patchwork {
 		color: string;
 	};
 
+	type ChannelAppDetailsResponse = {
+		message: string;
+		data: ChannelAppDetailsData;
+	};
+
+	type ChannelAppDetailsData = {
+		_id: string;
+		name: string;
+		userId: string;
+		email: string;
+		Branding: {
+			appName: string;
+			appIcon: string;
+			splashIcon: string;
+		}[];
+		Navigation: {
+			label: string;
+			choosedScreen: {
+				id: string;
+				screenNames: {
+					title: string;
+					description: string;
+				}[];
+				flavourContentJson: string;
+				flavourTitle: string;
+			};
+			id: string;
+		}[];
+		Theme: {
+			themeName: string;
+			bgColor: string;
+			buttonColor: string;
+			linkColor: string;
+			avatarColor: string;
+			textColor: string;
+			id: string;
+		}[];
+		Language: {
+			name: string;
+			id: string;
+		}[];
+		Font: {
+			headingFont: string;
+			bodyFont: string;
+			label: string;
+			id: string;
+		}[];
+		AdditionalDetails: {
+			_id: { $oid: string };
+			status: string;
+			terms: string;
+			termsContent: string;
+			policy: string;
+			policyContent: string;
+			guideline: string;
+			guidelineContent: string;
+			channelConfig: string;
+			newIntegration: string;
+			platformCredentials: string;
+			integrationLabel: string;
+			termsLabel: string;
+			channelConfigLabel: string;
+			userId: string;
+			appId: { $oid: string };
+		}[];
+		Screen: {
+			_id: { $oid: string };
+			label: string;
+			userId: string;
+			appId: { $oid: string };
+			screens: {
+				id: string;
+				default: boolean;
+				screenNames: {
+					title: string;
+					description: string;
+				}[];
+			}[];
+		}[];
+		Testing: {
+			_id: { $oid: string };
+			status: string;
+			testAccEmails: string[];
+			requestAndroidText: boolean;
+			label: string;
+			userId: string;
+			appId: { $oid: string };
+		}[];
+		AppStore: {
+			appleDeveloperEmail: string;
+			googlePlayDeveloperEmail: string;
+			appleAppStoreDescription: string;
+			googlePlayStoreDescription: string;
+			imageryMode: string;
+			deviceType: string;
+			uploadedImages: string[];
+		}[];
+		CommunitySetting: {
+			_id: string;
+			serverSoftware: string;
+			serverType: string;
+			serverName: string;
+			hostingType: string;
+			serverDescription: string;
+			accountAccess: string;
+			adminEmail: string;
+			moderatorEmail: string;
+			status: string;
+			label: string;
+			isDeleted: boolean;
+			createdAt: { $date: string };
+			updatedAt: { $date: string };
+			userId: string;
+			appId: { $oid: string };
+		}[];
+		UserApproval: any[];
+		App: {
+			appId: string;
+			status: string;
+			label: string;
+			approvalStatus: string;
+			id: string;
+			createdAt: string;
+			updatedAt: string;
+		}[];
+		Order: any[];
+		_count: {
+			Branding: number;
+			Navigation: number;
+			Theme: number;
+			Language: number;
+			Font: number;
+			AdditionalDetails: number;
+			Screen: number;
+			Testing: number;
+			AppStore: number;
+			CommunitySetting: number;
+			UserApproval: number;
+			App: number;
+			Menu: number;
+		};
+	};
+
 	type Mention = {
 		id: string;
 		username: string;

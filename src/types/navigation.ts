@@ -50,6 +50,7 @@ export type RootStackParamList = {
 	};
 	ConversationsStack: NavigatorScreenParams<ConversationsStackParamList>;
 	SplashScreen: undefined;
+	AppStartScanner: undefined;
 	VideoPlayer: { status: Patchwork.Status };
 	GifPlayer: { status: Patchwork.Status; gifUrl: string };
 	NotiStack: NavigatorScreenParams<NotiStackParamList>;

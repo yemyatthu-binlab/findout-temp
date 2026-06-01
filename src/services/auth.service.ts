@@ -12,11 +12,11 @@ import {
 	DEFAULT_API_URL,
 	DEFAULT_DASHBOARD_API_URL,
 	CHANNEL_INSTANCE,
-	DEFAULT_BRISTOL_DASHBOARD_API_URL,
 	DEFAULT_FINDOUT_DASHBOARD_API_URL,
 } from '@/util/constant';
 import { platform } from 'os';
 import { getActiveAuthState } from '@/util/storage';
+import { useAppConfigStore } from '@/store/appConfig/appConfigStore';
 
 export const getUserById = async ({
 	queryKey,
@@ -31,11 +31,13 @@ export const getUserById = async ({
 };
 
 export const mastodonLogin = async (params: LoginMutationPayload) => {
+	const { activeAppInfo } = useAppConfigStore.getState();
 	const body = {
 		...params,
 		grant_type: 'password',
-		client_id: process.env.CLIENT_ID,
-		client_secret: process.env.CLIENT_SECRET_TOKEN,
+		client_id: activeAppInfo?.clientId || process.env.CLIENT_ID,
+		client_secret:
+			activeAppInfo?.clientSecret || process.env.CLIENT_SECRET_TOKEN,
 		scope: 'read write follow push profile',
 	};
 
@@ -181,16 +183,13 @@ export const signUp = async (params: {
 export const verifyAuthToken = async (token?: string, domain?: string) => {
 	try {
 		const authToken = token ?? (await getActiveAuthState()).access_token;
-		const baseURL =
-			domain ?? (await getActiveAuthState()).domain ?? DEFAULT_API_URL;
 		const resp: AxiosResponse<Patchwork.Account> = await instance.get(
 			appendApiVersion('accounts/verify_credentials', 'v1'),
 			{
 				headers: {
 					Authorization: `Bearer ${authToken}`,
-					skipInterceptor: true,
+					// skipInterceptor: true,
 				},
-				baseURL,
 			},
 		);
 
@@ -291,10 +290,12 @@ export const updatePassword = async (params: {
 
 export const revokeToken = async (params: { token: string }) => {
 	try {
+		const { activeAppInfo } = useAppConfigStore.getState();
 		const body = {
 			...params,
-			client_id: process.env.CLIENT_ID,
-			client_secret: process.env.CLIENT_SECRET_TOKEN,
+			client_id: activeAppInfo?.clientId || process.env.CLIENT_ID,
+			client_secret:
+				activeAppInfo?.clientSecret || process.env.CLIENT_SECRET_TOKEN,
 		};
 		const resp: AxiosResponse<{}> = await instance.post('/oauth/revoke', body);
 		return resp.data;
@@ -329,7 +330,7 @@ export const requestInstance = async ({ domain }: { domain: string }) => {
 			client_name: domain,
 			website: DEFAULT_API_URL,
 			redirect_uris: 'Patchwork://',
-			scopes: `write read follow push`,
+			scopes: `write read follow push profile`,
 		};
 
 		const resp: AxiosResponse<Patchwork.InstanceResponse> = await instance.post(
@@ -484,6 +485,7 @@ export const checkIsCurrentChannelAppDepracated = async ({
 	os_type: string;
 }) => {
 	try {
+		const { activeAppInfo } = useAppConfigStore.getState();
 		const resp: AxiosResponse<{ deprecated: boolean; link_url: string }> =
 			await instance.get(appendApiVersion(`app_versions/check_version`, 'v1'), {
 				params: {
@@ -494,8 +496,11 @@ export const checkIsCurrentChannelAppDepracated = async ({
 					removeBearerToken: true,
 				},
 				headers: {
-					client_id: process.env.CLIENT_ID || '',
-					client_secret: process.env.CLIENT_SECRET_TOKEN || '',
+					client_id: activeAppInfo?.clientId || process.env.CLIENT_ID || '',
+					client_secret:
+						activeAppInfo?.clientSecret ||
+						process.env.CLIENT_SECRET_TOKEN ||
+						'',
 				},
 			});
 		return resp.data;
@@ -505,10 +510,12 @@ export const checkIsCurrentChannelAppDepracated = async ({
 };
 
 export const getAccessTokenForSignUp = async () => {
+	const { activeAppInfo } = useAppConfigStore.getState();
 	const body = {
 		grant_type: 'client_credentials',
-		client_id: process.env.CLIENT_ID,
-		client_secret: process.env.CLIENT_SECRET_TOKEN,
+		client_id: activeAppInfo?.clientId || process.env.CLIENT_ID,
+		client_secret:
+			activeAppInfo?.clientSecret || process.env.CLIENT_SECRET_TOKEN,
 		scope: 'read write follow push profile',
 	};
 
@@ -517,6 +524,29 @@ export const getAccessTokenForSignUp = async () => {
 			'/oauth/token',
 			body,
 		);
+		return data;
+	} catch (error) {
+		return handleError(error);
+	}
+};
+
+export const getAppDetailsFromChannel = async (payload: {
+	appId: string;
+	userId: string;
+}) => {
+	try {
+		const { data }: AxiosResponse<Patchwork.ChannelAppDetailsResponse> =
+			await axios.get(
+				`${process.env.SOURCE_CHANNEL_API_URL}/api/admin/${payload.appId}/app/details?count=true&userId=${payload.userId}`,
+				{
+					headers: {
+						Authorization:
+							'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQzM2MwNmY0LTUwMzMtNGFiOC1hYmU3LTM4MjVmYTNiNGMzNCIsInVzZXJJZCI6IjExNDM4NzI2MDE1NTMwMjgzNCIsImVtYWlsIjoieWVteWF0dGh1LmNzQGdtYWlsLmNvbSIsImlhdCI6MTc4MDAyNDYzMX0.YTnGQd1WI0HchK5OYS9sikKdHdCRuhZPbwaVmn-aONQ',
+						Cookie:
+							'access_token=3u6hmKHEfhicVuql2pWdhISPRftC1o0skn42xJ0nSVo; user_role=UserAdmin; admin-token=Fe26.2*1*2bbb7011451111f4910f5c2be12449ce0d7297c8498e645e96b3ecd4984eae20*i-Lsak-2MhOB5mrkyOnUUw*1WqhY0FRtdlmH798FvXRM9I49yz3T8c4zdtALMzF7TEIsEiaJJ-XTYeYJwvZXpzLnJoeJF08eoM2ME9stOmVdm_wBWhzb9Vum5PJIV-PD-Qydd492dtDQj3FbcK2T20SmHYBsl0Pa1rzr-8NI2UcLXMDQl5B0tnO2hDxQXl9CaY3wW5NvPQrsbov0THxz1ZbENWOV-dUNPLNhAPJr_z6BqmqqApaXGiuR_U02DNsU8Wm1fCzZZxbh1JJjfxXN5IDUFQAphdZvlxUtXX7Cxu7srLvulVVnBCU1OHbrKDqFTUUc-0uqmuzRts3Rn4PUpmci583OQVa_lwHOFxt0QDiicgz7UHVBiSArkvI8MUH8lY2jGysq0_ImrdgqlUJabKwJKsMTENJHegR8r5pB1dXuscsz2cWNziMhh1GgGJIZfs*1781234231208*b52dcde3da210b1c68fd7e4eb7dd9d966b42d286d521706d0cba63c9d39e1ab4*2lKFdH5dTcIb88CtolIoMShM_qFrY8I3eaUa84ZTA50~2',
+					},
+				}, // headers is just temporary solution until we implement proper auth to be usabe with mobile in build an app next js site
+			);
 		return data;
 	} catch (error) {
 		return handleError(error);

@@ -15,8 +15,7 @@ export const CHANNELS_FALLBACK_PREVIEW_IMAGE_URL =
 
 export const DEFAULT_API_URL = 'https://patchwork.io';
 export const DEFAULT_DASHBOARD_API_URL = 'https://dashboard.channel.org';
-export const DEFAULT_BRISTOL_DASHBOARD_API_URL =
-	'https://dashboard.thebristolcable.social';
+
 export const DEFAULT_FINDOUT_DASHBOARD_API_URL =
 	'https://dashboard.findout.media';
 export const PATCHWORK_CHANNEL_API_URL = 'https://patchwork.channel.org';
@@ -35,3 +34,15 @@ export const NEWSMAST_INSTANCE_V1 = 'https://newsmast.social';
 export const MASTODON_INSTANCE = 'https://mastodon.social';
 export const CHANNEL_INSTANCE = 'https://channel.org';
 export const MO_ME_INSTANCE = 'https://mo-me.social';
+
+export const GEM_ENABLED_INSTANCES = [
+	CHANNEL_INSTANCE,
+	NEWSMAST_INSTANCE_V1,
+	MO_ME_INSTANCE,
+	'leicester.chat',
+	'xemele.social',
+	'thebristocable.social',
+	'findout.media',
+	'toot.wales',
+	'qlub.social',
+];

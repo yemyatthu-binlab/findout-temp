@@ -22,6 +22,7 @@ import customColor from '@/util/constant/color';
 import { ThemeText } from '@/components/atoms/common/ThemeText/ThemeText';
 import { useOpenNotifications } from '@/hooks/custom/useOpenNotifications';
 import { useNotificationBadgeSync } from '@/hooks/custom/useNotificationBadgeSync';
+import { useAppConfigStore } from '@/store/appConfig/appConfigStore';
 
 type Props = {
 	account: Patchwork.Account;
@@ -37,6 +38,8 @@ const HomeFeedHeader = ({ account, showUnderLine = true }: Props) => {
 
 	const { notiCount, latestNotificationId, lastReadId } =
 		useNotificationBadgeSync();
+
+	const appName = useAppConfigStore(state => state.activeAppInfo?.appName);
 
 	const { handleOpenNotifications } = useOpenNotifications({
 		notiCount,
@@ -70,7 +73,7 @@ const HomeFeedHeader = ({ account, showUnderLine = true }: Props) => {
 			>
 				<View className="flex-1 justify-center">
 					<ThemeText className="font-BBHSansBogle_Regular text-3xl mr-3">
-						Patchwork
+						{appName || 'Patchwork'}
 					</ThemeText>
 				</View>
 

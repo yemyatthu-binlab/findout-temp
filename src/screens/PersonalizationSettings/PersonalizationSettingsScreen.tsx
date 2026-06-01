@@ -7,7 +7,7 @@ import { useUpdateAltTextSetting } from '@/hooks/mutations/feed.mutation';
 import { useGetAltTextSetting } from '@/hooks/queries/feed.queries';
 import { useAuthStore } from '@/store/auth/authStore';
 import { updateAltTextSettingCache } from '@/util/cache/channel/channelCache';
-import { DEFAULT_INSTANCE } from '@/util/constant';
+import { DEFAULT_INSTANCE, GEM_ENABLED_INSTANCES } from '@/util/constant';
 import { SettingStackScreenProps } from '@/types/navigation';
 import { AppIcons } from '@/util/icons/icon.common';
 import { useTranslation } from 'react-i18next';
@@ -20,10 +20,11 @@ const PersonalizationSettingsScreen: React.FC<
 	const { t } = useTranslation();
 	const { userOriginInstance } = useAuthStore();
 	const { colorScheme } = useColorScheme();
+	const isEnabledInstance =
+		GEM_ENABLED_INSTANCES.includes(userOriginInstance) ||
+		userOriginInstance?.endsWith('channel.org');
 
-	const { data: altTextSetting } = useGetAltTextSetting(
-		DEFAULT_INSTANCE === userOriginInstance,
-	);
+	const { data: altTextSetting } = useGetAltTextSetting(isEnabledInstance);
 
 	const { mutate: updateAltTextSetting } = useUpdateAltTextSetting({
 		onMutate: ({ enabled }) => {
@@ -52,7 +53,7 @@ const PersonalizationSettingsScreen: React.FC<
 					title={t('setting.appearance.language')}
 					onPress={() => navigation.navigate('Language')}
 				/>
-				{[DEFAULT_INSTANCE].includes(userOriginInstance) && (
+				{isEnabledInstance && (
 					<View className="mt-1">
 						<SettingToggleItem
 							icon={AppIcons.images}
