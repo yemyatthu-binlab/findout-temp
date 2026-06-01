@@ -1,6 +1,6 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-	presets: ['module:@react-native/babel-preset'],
+	presets: ['module:@react-native/babel-preset', 'nativewind/babel'],
 	plugins: [
 		[
 			'module-resolver',
@@ -13,7 +13,6 @@ module.exports = {
 			},
 		],
 		'inline-dotenv',
-		'nativewind/babel',
 		'@babel/plugin-transform-export-namespace-from',
 		'react-native-worklets/plugin',
 	],

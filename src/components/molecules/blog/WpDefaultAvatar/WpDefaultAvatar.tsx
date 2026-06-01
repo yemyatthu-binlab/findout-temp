@@ -1,8 +1,4 @@
 import { View, Text, StyleProp, ViewStyle } from 'react-native';
-import { styled } from 'nativewind';
-
-const StyledView = styled(View);
-const StyledText = styled(Text);
 
 interface InitialAvatarProps {
 	name: string;
@@ -38,7 +34,7 @@ const WpDefaultAvatar = ({
 	const fontSize = size ? Math.floor(size / 2.5) : 16;
 
 	return (
-		<StyledView
+		<View
 			className={`items-center justify-center rounded-full ${className ?? ''}`}
 			style={[
 				{
@@ -48,7 +44,7 @@ const WpDefaultAvatar = ({
 				style,
 			]}
 		>
-			<StyledText
+			<Text
 				className="font-NewsCycle_Bold"
 				style={{
 					color: textColor,
@@ -56,8 +52,8 @@ const WpDefaultAvatar = ({
 				}}
 			>
 				{initials}
-			</StyledText>
-		</StyledView>
+			</Text>
+		</View>
 	);
 };
 

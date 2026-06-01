@@ -38,9 +38,10 @@ import { cn } from '@/util/helper/twutil';
 import { isTablet } from '@/util/helper/isTablet';
 import { useTranslation } from 'react-i18next';
 import Video, { ResizeMode } from 'react-native-video';
-import { styled } from 'nativewind';
+import {  } from 'nativewind';
 
-const StyledVideo = styled(Video);
+import { cssInterop } from "nativewind";
+cssInterop(Video, { className: "style" });
 
 type Props = {
 	onClose: () => void;
@@ -331,7 +332,7 @@ const EditPhotoModal: React.FC<Props> = ({
 						</View>
 					) : isVideo && isLocalEdit ? (
 						<View className="w-full h-[230] rounded-md overflow-hidden bg-black justify-center items-center">
-							<StyledVideo
+							<Video
 								source={{ uri: media?.preview_url }}
 								resizeMode={ResizeMode.COVER}
 								paused={true}

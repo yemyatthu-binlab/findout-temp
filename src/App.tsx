@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import '../global.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MMKV } from 'react-native-mmkv';
 import { useEffect, useRef, useState } from 'react';

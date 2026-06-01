@@ -1,4 +1,5 @@
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
+const { withNativeWind } = require('nativewind/metro');
 const path = require('path');
 const { generate } = require('@storybook/react-native/scripts/generate');
 
@@ -24,6 +25,9 @@ const config = {
 	},
 };
 
-module.exports = withSentryConfig(
-	mergeConfig(getDefaultConfig(__dirname), config),
+const mergedConfig = mergeConfig(getDefaultConfig(__dirname), config);
+
+module.exports = module.exports = withNativeWind(
+	withSentryConfig(mergedConfig),
+	{ input: './global.css' },
 );

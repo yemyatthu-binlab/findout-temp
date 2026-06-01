@@ -17,7 +17,7 @@ import { isTablet } from '@/util/helper/isTablet';
 import { updateSensitiveImageCache } from '@/util/cache/feed/feedCache';
 import { Blurhash } from 'react-native-blurhash';
 import SensitiveMedia from '../SensitiveMedia/SesitiveMedia';
-import { styled } from 'nativewind';
+import {  } from 'nativewind';
 
 type Props = {
 	status: Patchwork.Status;
@@ -29,7 +29,8 @@ type StatusVideoNavigationProp = CompositeNavigationProp<
 	StackNavigationProp<RootStackParamList>
 >;
 
-const StyledVideo = styled(Video);
+import { cssInterop } from "nativewind";
+cssInterop(Video, { className: "style" });
 
 const StatusVideo = ({ status, isFromQuoteCompose = false }: Props) => {
 	const imageCount = status.media_attachments.length;
@@ -138,7 +139,7 @@ const StatusVideo = ({ status, isFromQuoteCompose = false }: Props) => {
 									}}
 									className="flex-1 h-full w-full"
 								>
-									<StyledVideo
+									<Video
 										paused={false}
 										controls={false}
 										repeat
@@ -240,7 +241,7 @@ const StatusVideo = ({ status, isFromQuoteCompose = false }: Props) => {
 							>
 								{status.media_attachments[index].type == 'gifv' ? (
 									<>
-										<StyledVideo
+										<Video
 											paused={false}
 											controls={false}
 											repeat

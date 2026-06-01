@@ -9,7 +9,8 @@ import { useColorScheme, styled } from 'nativewind';
 import Video, { ResizeMode } from 'react-native-video';
 import { CircleFade } from 'react-native-animated-spinkit';
 
-const StyledVideo = styled(Video);
+import { cssInterop } from "nativewind";
+cssInterop(Video, { className: "style" });
 
 const GifPlayer: React.FC<RootScreenProps<'GifPlayer'>> = ({
 	navigation,
@@ -45,7 +46,7 @@ const GifPlayer: React.FC<RootScreenProps<'GifPlayer'>> = ({
 			</View>
 
 			<View className="flex-1 justify-center bg-black items-center">
-				<StyledVideo
+				<Video
 					paused={false}
 					controls={false}
 					repeat

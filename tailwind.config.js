@@ -2,11 +2,13 @@ require('dotenv').config();
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
+	// NOTE: Keep your existing content paths
 	content: [
 		'./src/App.{js,jsx,ts,tsx}',
 		'./src/screens/**/*.{js,jsx,ts,tsx}',
 		'./src/components/**/*.{js,jsx,ts,tsx}',
 	],
+	presets: [require('nativewind/preset')],
 	theme: {
 		extend: {
 			fontFamily: {
@@ -38,7 +40,7 @@ module.exports = {
 				'skeleton-highlight': '#7A8288',
 				'skeleton-bg': '#585e62',
 				'modal-bg': 'rgba(0, 0, 0, 0.5)',
-				'patchwork-primary': '#ff3c26', //#cf4af0
+				'patchwork-primary': '#ff3c26',
 				'patchwork-primary-dark': '#ff3c26',
 				'patchwork-secondary': '#3fa7e8',
 				'patchwork-flourish': '#45e67a',
@@ -48,5 +50,4 @@ module.exports = {
 		},
 	},
 	plugins: [],
-	// darkMode: 'class',
 };

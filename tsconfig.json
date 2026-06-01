@@ -1,21 +1,28 @@
 {
-	"extends": "@react-native/typescript-config",
-	"compilerOptions": {
-		"types": ["react-native", "jest", "node"],
-		"jsx": "react-jsx",
-		"paths": {
-			"@/*": ["./src/*"]
-		},
-		"allowImportingTsExtensions": false,
-		"module": "esnext"
-	},
-	"include": [
-		"./src/**/*",
-		"index.d.ts",
-		".eslintrc.js",
-		"jest.setup.js",
-		"jest.config.js",
-		"babel.config.js",
-		"index.js"
-	]
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "types": [
+      "react-native",
+      "jest",
+      "node"
+    ],
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "allowImportingTsExtensions": false,
+    "module": "esnext"
+  },
+  "include": [
+    "./src/**/*",
+    "index.d.ts",
+    ".eslintrc.js",
+    "jest.setup.js",
+    "jest.config.js",
+    "babel.config.js",
+    "index.js",
+    "nativewind-env.d.ts"
+  ]
 }

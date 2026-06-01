@@ -15,7 +15,7 @@ import { PenIcon } from '@/util/svg/icon.profile';
 import { ThemeText } from '../../common/ThemeText/ThemeText';
 import { useTranslation } from 'react-i18next';
 import { useManageAttachmentActions } from '@/store/compose/manageAttachments/manageAttachmentStore';
-import { styled } from 'nativewind';
+import {  } from 'nativewind';
 
 type MediaItemProps = {
 	item: Asset | (Patchwork.Attachment & { processing?: boolean });
@@ -36,7 +36,8 @@ type MediaItemProps = {
 	imageUri: string | undefined;
 };
 
-const StyledVideo = styled(Video);
+import { cssInterop } from "nativewind";
+cssInterop(Video, { className: "style" });
 
 const MediaItem = ({
 	item,
@@ -81,7 +82,7 @@ const MediaItem = ({
 		>
 			{isVideo ? (
 				<View className="w-full h-full rounded-md bg-black justify-center items-center">
-					<StyledVideo
+					<Video
 						source={{ uri: mediaUri }}
 						className="w-full h-full rounded-md"
 						resizeMode={ResizeMode.COVER}

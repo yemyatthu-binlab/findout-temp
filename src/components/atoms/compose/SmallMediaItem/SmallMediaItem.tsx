@@ -9,7 +9,7 @@ import { Blurhash } from 'react-native-blurhash';
 import FastImage from '@d11/react-native-fast-image';
 import { Asset } from 'react-native-image-picker';
 import Video, { ResizeMode } from 'react-native-video';
-import { styled, useColorScheme } from 'nativewind';
+import {  useColorScheme } from 'nativewind';
 import { ComposeType } from '@/context/composeStatusContext/composeStatus.type';
 import { isAsset } from '../ImageCard/ImageCard';
 import ImageProgressBar from '../ImageProgressBar/ImageProgressBar';
@@ -25,7 +25,8 @@ type SmallMediaItemProps = {
 	handleImageRemove: (index: number) => void;
 };
 
-const StyledVideo = styled(Video);
+import { cssInterop } from "nativewind";
+cssInterop(Video, { className: "style" });
 
 const SmallMediaItem = ({
 	item,
@@ -64,7 +65,7 @@ const SmallMediaItem = ({
 			<View className="w-full h-full rounded-md overflow-hidden bg-black">
 				{isVideo ? (
 					<>
-						<StyledVideo
+						<Video
 							source={{ uri: mediaUri }}
 							className="w-full h-full"
 							resizeMode={ResizeMode.COVER}
